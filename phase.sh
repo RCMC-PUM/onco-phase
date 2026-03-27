@@ -9,6 +9,7 @@ THREADS="${5:-10}"
 MODE="${6:-full}"
 
 AUTOSOMES=$(printf "chr%s," {1..22} | sed 's/,$//')
+AUTOSOMES_SPACE_SEPARATED=$(printf "chr%s " {1..22} | sed 's/,$//')
 FAST_REGION="chr7:130386171-130606465"
 
 mkdir -p "$OUT_DIR"
@@ -110,7 +111,7 @@ whatshap haplotag \
     --reference "$REFERENCE" \
     --ignore-read-groups \
     --output-threads "$THREADS" \
-    --regions "$REGION" \
+    --regions "$AUTOSOMES_SPACE_SEPARATED" \
     -o "$HAPLOTAGGED_BAM" \
     "$PHASED_VCF" \
     "$BAM"
