@@ -1,0 +1,11 @@
+# OS
+.DS_Store
+
+# TMP files
+*.bam
+*.vcf
+*.vcf.gz
+*.bed
+*.bedmethyl
+*.bedmethyl.gz
+

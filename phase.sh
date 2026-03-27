@@ -132,7 +132,7 @@ modkit pileup \
     --bgzf \
     --combine-strands \
     --reference "$REFERENCE" \
-    --modified-bases 5mC
+    --modified-bases 5mC 5hmC
 
 echo "[DONE] Pipeline completed successfully"
 echo "Phased VCF:        $PHASED_VCF"
