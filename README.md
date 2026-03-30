@@ -3,17 +3,17 @@
 End-to-end pipeline for:
 
 - VCF filtering (high-confidence heterozygous SNPs)
-- Read-based phasing using WhatsHap
+- Read-based phasing (WhatsHap)
 - Haplotagging BAM alignments
-- Generating phased methylation profiles using modkit
+- Phased methylation profiling (modkit)
 
-Designed for ONT + 5-base / methylation-aware workflows.
+Designed for ONT + 5-base workflows.
 
 ---
 
-## 📦 Requirements
+## Requirements
 
-Make sure the following tools are available in `$PATH`:
+Tools in `$PATH`:
 
 - bcftools
 - tabix
@@ -23,48 +23,63 @@ Make sure the following tools are available in `$PATH`:
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ```bash
-./phase.sh <VCF> <BAM> <REFERENCE> <OUT_DIR> [THREADS] [MODE]
+./phase.sh <VCF> <BAM> <REFERENCE> <OUT_DIR> [THREADS] [MODE] [DP] [AF_MIN] [AF_MAX]
 ```
 
+### Defaults
+
+- THREADS = 10
+- MODE = full
+- DP = 30
+- AF_MIN = 0.30
+- AF_MAX = 0.70
+
 ---
 
-## ⚙️ Modes
+## Modes
 
 ### full
-- Whole autosomes: chr1–chr22
+- Autosomes: chr1–chr22
 
 ### fast
-- Region: chr1:1-10,000,000
+- Region: chr7:130386171-130606465 (MEST - imprinted gene)
 
 ---
 
-## 🔬 Pipeline Steps
+## Steps
 
-1. VCF indexing  
-2. Variant filtering (SNPs, PASS, het, AF 0.2–0.8, DP ≥ 30)  
-3. Phasing (WhatsHap)  
-4. Haplotagging  
-5. Phasing stats  
-6. Phased methylation (modkit)  
+1. Index VCF + BAM  
+2. Filter SNPs (PASS, het, AF + DP)  
+3. Phase (WhatsHap)  
+4. Haplotag BAM  
+5. Stats  
+6. modkit pileup  
 
 ---
 
-## 📂 Outputs
+## Output
+
+All results in:
+
+```
+OUT_DIR/SAMPLE_NAME/
+```
+
+Files:
 
 - *.filtered.vcf.gz  
 - *.phased.vcf.gz  
 - *.phased.bam  
 - *.whatshap.stats.tsv  
-- *.modkit.bedmethyl.gz  
+- modkit/*  
 
 ---
 
-## 🧠 Notes
+## Notes
 
-- AF filtering stabilizes phasing  
-- DP ≥ 30 improves reliability  
-- Designed for ONT / somatic-like data  
-
+- Single-sample VCF expected  
+- Uses FORMAT/AF and FORMAT/DP  
+- Tunable AF/DP for somatic data
