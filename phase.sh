@@ -24,7 +24,7 @@ FILTERED_VCF="${SAMPLE_DIR}/${sample}.filtered.vcf.gz"
 PHASED_VCF="${SAMPLE_DIR}/${sample}.phased.vcf.gz"
 HAPLOTAGGED_BAM="${SAMPLE_DIR}/${sample}.phased.bam"
 STATS_TSV="${SAMPLE_DIR}/${sample}.whatshap.stats.tsv"
-MODKIT_OUTPUT="${SAMPLE_DIR}/modkit"
+MODKIT_OUTPUT="${SAMPLE_DIR}/${sample}-modkit"
 
 case "$MODE" in
     full)
