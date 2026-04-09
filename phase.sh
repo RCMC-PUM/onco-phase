@@ -82,7 +82,7 @@ bcftools view \
     -r "$REGION" \
     -m2 -M2 \
     -v snps \
-    -f PASS \
+    -f PASS,NonSomatic \
     -g het \
     -i "FORMAT/AF[0:0]>=${AF_MIN} && FORMAT/AF[0:0]<=${AF_MAX} && FORMAT/DP[0]>=${DP}" \
     -Oz \
